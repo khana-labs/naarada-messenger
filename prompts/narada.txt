@@ -1,0 +1,541 @@
+# Narada Messenger
+
+## A Decentralized Emergency Communication Network for a Disconnected World
+
+### Project Overview
+
+**Narada Messenger** is a next-generation emergency communication platform designed for situations in which conventional communication infrastructure has completely failed. In the hackathon scenario, extraterrestrial forces have disabled mobile networks, internet services, messaging applications, email systems, social media platforms, and central communication servers. As a result, people can no longer contact family members, emergency responders, hospitals, shelters, or government authorities.
+
+Narada Messenger solves this problem by turning nearby smartphones into temporary communication nodes. Instead of depending on cellular towers, cloud servers, or internet service providers, the platform creates a decentralized network in which every participating device can receive, store, carry, and forward encrypted messages.
+
+The system uses the geographical location of devices to guide messages toward the recipient’s last-known location. A message does not require a continuous connection between the sender and receiver. It can travel through several intermediate devices until it eventually reaches its destination.
+
+In simple terms:
+
+> Narada Messenger allows people to communicate even when the internet and mobile networks no longer exist, by transforming ordinary smartphones into a distributed network of communication towers.
+
+The name **Narada** is inspired by Narada Muni, traditionally known as a divine messenger who travelled between different worlds and carried information across great distances. Similarly, Narada Messenger carries information between disconnected people and regions.
+
+---
+
+## The Problem
+
+Modern communication systems are highly centralized. Almost every commonly used platform depends on infrastructure such as:
+
+* Mobile towers
+* Internet service providers
+* Satellites
+* Cloud servers
+* Central databases
+* Domain name systems
+* Authentication servers
+
+When this infrastructure becomes unavailable, even fully functional smartphones become nearly useless for communication.
+
+Traditional applications cannot operate because they require an active connection to a central server. Even if two people are located in the same city, they may not be able to contact each other when mobile networks and internet connectivity are unavailable.
+
+The major challenges are:
+
+1. How can a message be transmitted without internet or mobile networks?
+2. How can the system identify the intended receiver without central authentication?
+3. How can a message travel across a long distance when Bluetooth only covers a short range?
+4. How can emergency authorities locate and assist people?
+5. How can communication remain secure when messages pass through unknown devices?
+6. How can the system avoid network congestion, duplicate messages, and false emergency alerts?
+
+Narada Messenger addresses these challenges through decentralized identity, geographic routing, store-carry-forward communication, encryption, emergency prioritization, and community relay nodes.
+
+---
+
+## Core Concept
+
+Every device running Narada Messenger acts as both:
+
+* A communication device for its owner
+* A relay node for other users
+
+When a user sends a message, the message is not sent to a central server. Instead, the phone searches for nearby devices using technologies such as Bluetooth Low Energy, Wi-Fi Direct, or peer-to-peer Wi-Fi.
+
+The sender’s device selects the nearby node that has the highest probability of carrying the message closer to the receiver’s last-known coordinates.
+
+That device temporarily stores the encrypted message. It then searches for another nearby device that is closer to the destination. The process continues until the message reaches the intended receiver.
+
+Example:
+
+```text
+Sender
+   ↓
+Nearby Device A
+   ↓
+Device B moving toward destination
+   ↓
+Community Relay Node
+   ↓
+Device C near receiver
+   ↓
+Receiver
+```
+
+A direct connection between the sender and receiver is not required.
+
+---
+
+## Decentralized Digital Identity
+
+Narada Messenger does not rely on changing IP addresses to identify users. IP addresses may change frequently, may be shared by multiple devices, and become unusable when the internet is unavailable.
+
+Instead, each user receives a permanent **Narada ID** when registering on the platform.
+
+A user profile may contain:
+
+* Name
+* Unique Narada ID
+* Public cryptographic key
+* Emergency contact information
+* Trusted contacts
+* Last-known location
+* Location timestamp
+* Verification status
+* Authority or civilian role
+
+For example:
+
+```text
+Name: Shashank Chimote
+Narada ID: NRD-8F29A7
+Role: Civilian
+Last-known zone: NIT Jalandhar
+Location updated: 14:32
+```
+
+Before a communication failure, essential identity and contact information is securely synchronized to users’ devices. During emergency mode, users can search for a person using their name, Narada ID, phone number, or locally saved contact.
+
+The recipient’s public key is used to encrypt the message so that only the intended receiver can read it.
+
+---
+
+## Location-Guided Message Routing
+
+The primary innovation of Narada Messenger is its **geographic opportunistic routing system**.
+
+When a user sends a message, the application retrieves the receiver’s last-known location. Nearby devices anonymously exchange small routing beacons containing information such as:
+
+* Temporary node ID
+* Approximate current coordinates
+* Direction of movement
+* Location timestamp
+* Battery level
+* Available storage
+* Node reliability
+* Authority or relay status
+
+The sender’s device compares the available nearby nodes and selects the device most likely to move the message closer to the receiver.
+
+The routing decision is not based only on distance.
+
+For example:
+
+| Device   | Distance from receiver | Movement               | Battery | Routing decision |
+| -------- | ---------------------: | ---------------------- | ------: | ---------------- |
+| Device A |                   4 km | Moving away            |     70% | Rejected         |
+| Device B |                   6 km | Moving toward receiver |     65% | Selected         |
+| Device C |                   5 km | Stationary             |     20% | Backup           |
+
+Although Device A is currently closer, Device B is a better relay because it is moving toward the receiver and has sufficient battery.
+
+A routing score can consider:
+
+```text
+Routing Score =
+Distance improvement
++ Movement direction
++ Location freshness
++ Battery level
++ Node reliability
++ Signal quality
+```
+
+---
+
+## Store-Carry-Forward Communication
+
+Sometimes no nearby device is closer to the destination. In that situation, the message does not fail.
+
+The current device stores the encrypted message and enters **carry mode**.
+
+```text
+No suitable relay found
+        ↓
+Message stored securely
+        ↓
+Device owner moves to another location
+        ↓
+New nearby devices are discovered
+        ↓
+Message is forwarded to a better node
+```
+
+This method is called **store-carry-forward communication**.
+
+A student travelling from a hostel to the main gate, a bus moving between different areas, or a rescue vehicle travelling across the city can physically carry encrypted message packets between disconnected communication zones.
+
+The device owner does not need to open or manually forward the message. The transfer happens automatically when the application finds an appropriate relay.
+
+---
+
+## Limited Message Replication
+
+Sending every message to every device would overload the network. Therefore, Narada Messenger uses limited replication instead of unrestricted flooding.
+
+A normal message may be given two or three copies, while an emergency message may receive more copies.
+
+For example:
+
+```text
+                → Route A → Community node
+Sender Message
+                → Route B → Moving rescue vehicle
+```
+
+Once any copy reaches the receiver, a delivery receipt is generated. Other devices can then delete unnecessary copies.
+
+Each message also contains:
+
+* Unique message ID
+* Sender ID
+* Receiver ID
+* Creation time
+* Expiry time
+* Priority level
+* Maximum hop count
+* Encrypted content
+* Digital signature
+
+The expiry time and hop limit prevent old messages from circulating forever.
+
+---
+
+## Emergency and SOS Communication
+
+Narada Messenger provides a dedicated emergency mode for life-threatening situations.
+
+Users can create predefined or custom emergency requests such as:
+
+* Medical assistance required
+* Person trapped
+* Food or drinking water required
+* Shelter required
+* Missing person
+* Fire or dangerous area
+* Evacuation assistance
+* User is safe
+* Emergency resources available
+
+An SOS packet can include:
+
+```text
+Emergency type: Medical
+Current coordinates: 31.3959, 75.5358
+Accuracy: ±18 metres
+Captured at: 15:04
+Battery level: 16%
+Message: Person injured and unable to move
+Sender verification: Confirmed
+```
+
+Emergency messages receive:
+
+* Higher routing priority
+* More message copies
+* Faster scanning frequency
+* Longer storage duration
+* Priority display on authority dashboards
+
+---
+
+## Authority and Rescue Dashboard
+
+Hospitals, police stations, shelters, fire departments, rescue teams, and government agencies can operate verified Narada authority nodes.
+
+These nodes may be installed at fixed locations or carried by emergency responders.
+
+The authority dashboard displays:
+
+* Active SOS alerts
+* Last-known user coordinates
+* Location accuracy
+* Time of last update
+* Emergency category
+* Message verification status
+* Number of confirming reports
+* Message route history
+* Nearby shelters and response teams
+* Resolved and unresolved incidents
+
+Authorities may also receive a sequence of recent encounters:
+
+```text
+14:37 — User device detected near Hostel Block A
+14:49 — Message forwarded near Main Gate
+15:04 — Fresh SOS location received near Medical Centre
+```
+
+This information does not guarantee the user’s exact current location, but it helps rescue teams reconstruct their last-known movement and identify the most probable search area.
+
+---
+
+## Community Relay Nodes
+
+Some locations can function as powerful permanent or semi-permanent relay points:
+
+* Hospitals
+* Police stations
+* Schools
+* Government buildings
+* Railway stations
+* Shelters
+* Community centres
+* Emergency vehicles
+* Public transport buses
+
+These relay nodes can have stronger batteries, greater storage, better antennas, and offline local databases.
+
+They can distribute important information such as:
+
+* Safe routes
+* Unsafe zones
+* Shelter availability
+* Medical facility status
+* Food and water availability
+* Evacuation instructions
+* Missing-person reports
+* Official emergency announcements
+
+---
+
+## Security and Privacy
+
+Messages may pass through several unknown devices. Therefore, security is a fundamental part of Narada Messenger.
+
+### End-to-End Encryption
+
+The message content is encrypted using the receiver’s public key. Intermediate nodes can forward the packet but cannot read the private message.
+
+### Digital Signatures
+
+Every message is digitally signed by the sender. This helps detect modification and prevents basic impersonation.
+
+### Verified Authority Accounts
+
+Hospitals, police stations, rescue teams, and government authorities receive verified identities. Their public keys are stored in the system before an emergency occurs.
+
+### Anonymous Relay Information
+
+Devices broadcast temporary node IDs rather than a person’s real name or permanent identity.
+
+### Replay Protection
+
+Every message includes a unique ID, timestamp, expiration time, and digital signature. Old emergency warnings cannot simply be resent as new messages.
+
+### Rate Limiting
+
+The system limits how many emergency messages a user can create within a given time, reducing spam and deliberate network flooding.
+
+### Trust Levels
+
+Reports can be displayed using different reliability levels:
+
+* Verified authority report
+* Trusted contact report
+* Confirmed by multiple nearby users
+* Unverified report
+* Suspicious or conflicting report
+
+---
+
+## Website-Based Hackathon Prototype
+
+Since a browser cannot fully reproduce a real city-wide Bluetooth and Wi-Fi mesh network, the hackathon version of Narada Messenger will be developed as an interactive website that simulates the complete communication process.
+
+The website will demonstrate:
+
+1. User registration and Narada ID creation
+2. A map containing multiple simulated devices
+3. Sender and receiver selection
+4. Last-known receiver coordinates
+5. Nearby-device discovery
+6. Routing-score calculation
+7. Selection of the best relay node
+8. Movement of messages across devices
+9. Store-carry-forward mode
+10. Encrypted message packet visualization
+11. SOS message creation
+12. Authority rescue dashboard
+13. Delivery status and route history
+14. Network failure and disconnected-zone simulation
+
+The simulation map will contain moving and stationary nodes. Each node can have properties such as:
+
+```text
+Node name
+Current coordinates
+Movement direction
+Battery level
+Signal range
+Storage capacity
+Trust score
+Authority status
+```
+
+When a message is sent, the website will visually show the route:
+
+```text
+Shashank → Node 04 → Bus Relay → Node 19 → Alisha
+```
+
+The website can also demonstrate difficult scenarios.
+
+### Scenario 1: Direct Delivery
+
+The receiver is inside the sender’s local communication range.
+
+### Scenario 2: Multi-Hop Delivery
+
+The message travels through several nearby devices.
+
+### Scenario 3: No Available Route
+
+The message remains stored until a moving device creates a new route.
+
+### Scenario 4: Receiver Changes Location
+
+A newer location update changes the destination of the message.
+
+### Scenario 5: Emergency SOS
+
+An emergency message receives higher priority and reaches an authority node through multiple routes.
+
+---
+
+## Suggested Website Modules
+
+### User Dashboard
+
+Allows users to search contacts, send messages, activate emergency mode, and view delivery status.
+
+### Network Map
+
+Displays nearby nodes, communication ranges, message routes, shelters, authority nodes, and disconnected zones.
+
+### Routing Simulator
+
+Calculates and explains why a particular relay node was selected.
+
+### Emergency Centre
+
+Allows users to send SOS alerts and select emergency categories.
+
+### Authority Dashboard
+
+Displays active emergencies, probable locations, route histories, and available rescue resources.
+
+### Message Packet Inspector
+
+Shows encrypted message metadata, message priority, hop count, expiry time, and delivery state.
+
+### Network Analytics
+
+Displays:
+
+* Total active nodes
+* Delivered messages
+* Pending messages
+* Average delivery time
+* Number of emergency alerts
+* Failed or delayed routes
+* Network coverage
+* Most important relay nodes
+
+---
+
+## Proposed Technology Stack
+
+The hackathon website can be built using:
+
+* **Frontend:** React.js or Next.js
+* **Styling:** Tailwind CSS
+* **Map:** Leaflet with OpenStreetMap
+* **Routing simulation:** JavaScript graph algorithms
+* **Database:** Firebase, Supabase, or local JSON data
+* **Real-time simulation:** WebSockets or Firebase Realtime Database
+* **Authentication:** Firebase Authentication
+* **Visualization:** React Flow, D3.js, or custom map animations
+* **Encryption demonstration:** Web Crypto API
+* **Backend:** Node.js and Express.js
+* **Deployment:** Vercel or Firebase Hosting
+
+For the prototype, devices will be represented as graph nodes. Connections between nearby devices will be represented as graph edges. Geographic distance, movement, battery level, and signal range will determine which edges are currently available.
+
+---
+
+## Innovation and Uniqueness
+
+Narada Messenger is not simply another messaging platform with a futuristic interface. It redesigns the communication infrastructure itself.
+
+Its major innovations include:
+
+* Communication without internet or mobile towers
+* Smartphones acting as temporary network infrastructure
+* Geographic routing toward the recipient’s last-known location
+* Store-carry-forward messaging between disconnected zones
+* Limited message replication instead of uncontrolled flooding
+* Encrypted communication through untrusted relay devices
+* Location-aware emergency assistance
+* Verified authority and community relay nodes
+* Automatic delivery through moving people and vehicles
+* A network that becomes stronger as more users participate
+
+Unlike centralized messaging applications, Narada Messenger does not require a permanent path between the sender and receiver.
+
+The platform is designed around one central principle:
+
+> The network is not controlled by a company, cloud server, or tower. The people and their devices become the network.
+
+---
+
+## Future Scope
+
+A production version of Narada Messenger could be developed as a native Android application using Bluetooth Low Energy, Wi-Fi Direct, Wi-Fi Aware, GPS, offline maps, secure local storage, and device-to-device encryption.
+
+Future extensions could include:
+
+* Offline voice-message compression
+* Regional-language translation
+* AI-based emergency classification
+* Duplicate incident detection
+* Drone-based relay nodes
+* Rescue-vehicle communication hubs
+* Solar-powered permanent relay stations
+* Satellite fallback communication
+* Wearable emergency devices
+* Integration with disaster-management agencies
+* Offline facial or identity verification
+* Inter-city message transportation through public vehicles
+
+The system could be useful not only during an extraterrestrial attack but also during:
+
+* Earthquakes
+* Floods
+* Cyclones
+* Wars
+* Internet shutdowns
+* Large public gatherings
+* Remote expeditions
+* Forest rescue operations
+* Communication failures in rural regions
+
+---
+
+## Final Project Statement
+
+**Narada Messenger is a decentralized, location-guided emergency communication platform that enables encrypted messages to travel between disconnected users through nearby smartphones. Every participating device acts as a temporary relay node, storing, carrying, and forwarding messages toward the receiver’s last-known location. By combining geographic routing, delay-tolerant networking, secure digital identities, emergency prioritization, and community relay nodes, Narada Messenger allows humanity to communicate and coordinate even after conventional digital infrastructure has completely collapsed.**
