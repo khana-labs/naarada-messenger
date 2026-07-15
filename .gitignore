@@ -1,11 +1,26 @@
-.htaccess
-css.php
-rpc/
-sites/site*/admin/
-sites/site*/private/
-sites/site*/public/admin/
-sites/site*/public/setup/
-sites/site*/public/theme/
-textpattern/
-HISTORY.txt
-README.txt
+# Node & Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# React Build Output
+build/
+dist/
+
+# Environment Variables (CRITICAL: Never commit these!)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# Editor Directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
