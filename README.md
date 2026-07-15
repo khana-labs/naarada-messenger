@@ -1,30 +1,16 @@
-# naarada-messenger
-The Premise: Aliens have destroyed the internet, mobile towers, and satellites. Normal digital communication is dead.          The Solution: RelayX, a decentralized offline communication system where every smartphone acts as a relay node.
+# React + Vite
 
-Messages hop from device to device (Phone A → Phone B → Phone C → Phone D) until they reach their destination.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Core Features Implemented
+Currently, two official plugins are available:
 
-    Offline Communication Simulation: Proving the concept of P2P network flow without relying on central routing.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-    Store-Carry-Forward: Devices must store encrypted messages and forward them when another node connects.
+## React Compiler
 
-    Emergency Priority: A queueing system where SOS/medical messages bypass standard messages.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-    Area Broadcast: The ability to flood the local network with urgent alerts.
+## Expanding the ESLint configuration
 
-    End-to-End Encryption (E2EE): Relay nodes must not be able to decrypt the payload they are carrying.
-
-    Smart Routing: Logic to select the best nearby node to pass data to (simulated).
-
-Tech Stack
-
-    Frontend: React.js
-
-    Backend/Signaling: Node.js + Express
-
-    Database: MongoDB or Firebase (to store user profiles/simulated persistent data)
-
-    P2P / Network Simulation: WebSocket & WebRTC (We will use these to simulate the Bluetooth/Wi-Fi Direct offline mesh in a browser environment for the demo).
-
-    Mapping: Leaflet Maps (to visualize device locations, node connections, and emergency)
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
