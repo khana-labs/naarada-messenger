@@ -1,0 +1,1822 @@
+# Narada Messenger — Complete Frontend and Dashboard Development Prompt
+
+Build a polished, responsive frontend prototype for **Narada Messenger**, a decentralized emergency communication platform designed to operate when the internet, cellular towers, cloud servers, and conventional messaging systems are unavailable.
+
+Narada Messenger transforms nearby smartphones into temporary communication nodes. Each device can discover other devices, securely store encrypted messages, carry them physically, and forward them toward the receiver’s last-known location.
+
+The website is a hackathon simulation of this system. It must visually demonstrate messaging, nearby-device discovery, geographic routing, emergency alerts, message relaying, network health, and authority response.
+
+## 1. Main Product Goal
+
+Design the interface for people operating under extreme stress during disasters, network blackouts, wars, infrastructure failures, or other emergencies.
+
+The interface must be:
+
+* Immediately understandable
+* Highly readable
+* Minimal
+* High contrast
+* Fast to navigate
+* Mobile-friendly
+* Usable with one hand
+* Battery-conscious
+* Accessible during panic
+* Free from unnecessary decoration
+* Clear even at low screen brightness
+
+The website must look futuristic and emergency-oriented, but **must not sacrifice readability for visual effects**.
+
+The user should understand the most important information within three seconds:
+
+1. Is the Narada network active?
+2. Is the user safe or in danger?
+3. Are nearby relay devices available?
+4. Are messages pending, relaying, or delivered?
+5. How can the user send a message or SOS alert immediately?
+
+---
+
+# 2. Core Design Philosophy
+
+Use a **panic-first user experience**.
+
+During an emergency, users may:
+
+* Have shaking hands
+* Be moving
+* Have limited time
+* Be using low brightness
+* Have poor visibility
+* Be injured
+* Be operating with low battery
+* Be unfamiliar with technical terminology
+* Be unable to read long paragraphs
+
+Therefore:
+
+* Use short labels.
+* Use one primary action per section.
+* Use large buttons.
+* Use clear status indicators.
+* Avoid hidden controls.
+* Avoid complex menus.
+* Avoid large blocks of explanatory text.
+* Avoid excessive charts.
+* Avoid too many cards on one screen.
+* Avoid decorative animations behind text.
+* Avoid ambiguous icons without labels.
+* Avoid pop-ups unless the information is critical.
+* Keep emergency actions permanently accessible.
+
+Every screen should answer one clear question.
+
+Examples:
+
+* Dashboard: “What is happening right now?”
+* Messages: “Who do I need to contact?”
+* Network Map: “Where is my message and what nodes are nearby?”
+* Emergency Centre: “What help do I need?”
+* Authority Dashboard: “Which incidents require immediate response?”
+
+---
+
+# 3. Colour Palette
+
+Use the following colours consistently.
+
+## Background — Toxic Black
+
+```css
+#0B0C10
+```
+
+Use as the main background throughout the application.
+
+It should feel like a system operating during a blackout.
+
+Do not use pure black for every card. Use slightly lighter dark surfaces for separation.
+
+Recommended surface colours:
+
+```css
+Main background: #0B0C10
+Primary surface: #11141A
+Secondary surface: #171B22
+Elevated surface: #1C2129
+Border: #2A303A
+```
+
+## Primary Text and Warning — Biohazard Yellow
+
+```css
+#FCE300
+```
+
+Use for:
+
+* Main headings
+* Active network status
+* Important warnings
+* Selected navigation items
+* Primary action emphasis
+* Ongoing routing activity
+* Emergency mode labels
+
+Do not use yellow for long body paragraphs.
+
+## Critical Alerts — Infrared Red
+
+```css
+#FF3333
+```
+
+Use red strictly for:
+
+* Active danger
+* SOS alerts
+* Critical battery warnings
+* Security breaches
+* Failed delivery
+* Immediate evacuation
+* Countdown timers
+* Unresolved high-priority incidents
+
+Do not use red decoratively.
+
+## Safe Zones and Communication — Bunker Cyan
+
+```css
+#00F5FF
+```
+
+Use for:
+
+* Safe shelters
+* Successful communication
+* Nearby relay devices
+* Map routes
+* Delivered messages
+* Helpful actions
+* Authority nodes
+* Location tracking
+* Encryption indicators
+
+## Secondary Text — Muted Slate
+
+```css
+#8B949E
+```
+
+Use for:
+
+* Timestamps
+* Coordinates
+* Supporting descriptions
+* Technical metadata
+* Settings
+* Inactive labels
+* Secondary information
+
+## Neutral Main Text
+
+Use a readable off-white for normal content:
+
+```css
+#F4F7FA
+```
+
+## Status Colour Rules
+
+* Yellow: warning, active process, attention needed
+* Red: immediate threat, failure, critical incident
+* Cyan: safe, connected, delivered, verified
+* Slate: secondary or inactive information
+* White: normal readable content
+
+Never communicate status using colour alone. Always include an icon and text label.
+
+Example:
+
+```text
+● CONNECTED
+▲ WARNING
+✕ FAILED
+✓ DELIVERED
+```
+
+---
+
+# 4. Typography
+
+## Display and Alert Fonts
+
+Use:
+
+* Orbitron
+* Share Tech Mono
+* Bebas Neue
+
+Use these only for:
+
+* Main page headings
+* Emergency labels
+* Status values
+* System identifiers
+* Countdown timers
+* Network mode indicators
+
+Avoid using futuristic fonts for long instructions or messages.
+
+## Body Font
+
+Use:
+
+* Inter
+* Roboto
+* SF Pro
+* System sans-serif fallback
+
+Use for:
+
+* Messages
+* Instructions
+* Buttons
+* Navigation
+* Forms
+* Descriptions
+* Emergency guidance
+
+## Typography Scale
+
+Desktop:
+
+```text
+Main page heading: 30–36px
+Section heading: 20–24px
+Important status: 18–22px
+Body text: 16–18px
+Secondary text: 14–15px
+Metadata: minimum 13px
+```
+
+Mobile:
+
+```text
+Main page heading: 24–28px
+Section heading: 19–22px
+Important status: 18–20px
+Body text: minimum 16px
+Secondary text: minimum 14px
+```
+
+Never use body text smaller than 14px.
+
+Use:
+
+* Strong line spacing
+* Short line lengths
+* Clear heading hierarchy
+* High contrast
+* Medium or semibold button text
+
+---
+
+# 5. Effects and Visual Style
+
+Create a controlled military-terminal and emergency-command visual style.
+
+Allowed effects:
+
+* Thin glowing borders
+* Soft cyan route glow
+* Small yellow pulse for active routing
+* Subtle scan lines on empty backgrounds
+* Minimal grid texture
+* Small radar animation
+* Gentle status indicator pulse
+* Short packet movement animation
+
+Do not apply glitch effects to readable text.
+
+Do not use:
+
+* Rapid flashing
+* Constant screen shaking
+* Heavy neon blur
+* Excessive particles
+* Large animated backgrounds
+* Complicated 3D elements
+* Decorative distortion
+* Overlapping information
+* Full-screen visual noise
+
+Animations must stop or reduce automatically when:
+
+* Battery saver mode is active
+* Reduced motion is enabled
+* The device is on mobile
+* The network simulation is paused
+
+---
+
+# 6. Application Structure
+
+Create two primary user roles:
+
+## Civilian Mode
+
+For regular users who need to:
+
+* Check network status
+* Find contacts
+* Send messages
+* Send SOS alerts
+* View nearby relay devices
+* Track message delivery
+* Find shelters
+* Mark themselves safe
+
+## Authority Mode
+
+For verified:
+
+* Hospitals
+* Police stations
+* Rescue teams
+* Fire departments
+* Shelters
+* Government emergency teams
+
+Authority users need to:
+
+* Monitor active incidents
+* Prioritize SOS alerts
+* View probable locations
+* Assign response teams
+* update incident status
+* Broadcast official announcements
+* View network coverage
+
+Provide a role switch in the prototype for demonstration purposes.
+
+---
+
+# 7. Responsive App Shell
+
+## Desktop Layout
+
+Use a three-part structure:
+
+### Left Sidebar
+
+Keep the sidebar narrow and fixed.
+
+Navigation items:
+
+1. Overview
+2. Messages
+3. Network Map
+4. Emergency
+5. Deliveries
+6. Safe Zones
+7. Authority Centre
+8. Settings
+
+At the bottom show:
+
+* User name
+* Narada ID
+* Role
+* Battery level
+* Sign out or exit simulation
+
+Each item must include an icon and a text label.
+
+The Emergency item should be visually separated and use a red outline.
+
+### Top Status Bar
+
+Display only essential system status:
+
+* Narada logo
+* “OFFLINE NETWORK ACTIVE”
+* Nearby nodes count
+* Current zone
+* Battery percentage
+* Current time
+* Profile button
+
+Example:
+
+```text
+NARADA // OFFLINE NETWORK ACTIVE
+12 NODES NEARBY | ZONE: NIT JALANDHAR | BATTERY: 64%
+```
+
+### Main Content Area
+
+Use large, readable sections with generous spacing.
+
+Do not place more than four major information cards in the first viewport.
+
+## Mobile Layout
+
+Use:
+
+* Compact top status bar
+* Bottom navigation
+* Persistent SOS button
+* Full-width cards
+* Large touch targets
+* Minimal secondary information
+
+Mobile bottom navigation:
+
+1. Home
+2. Messages
+3. Map
+4. SOS
+5. More
+
+The SOS action must be larger and centred.
+
+---
+
+# 8. Global Emergency Action
+
+Add a persistent **SEND SOS** button.
+
+Desktop:
+
+* Fixed near the lower-right corner
+* Red outline
+* Clearly labelled
+* Large enough to identify instantly
+
+Mobile:
+
+* Large central bottom navigation button
+* Minimum 64px touch area
+
+Do not send the alert immediately after one accidental tap.
+
+Interaction:
+
+1. User taps “SEND SOS”.
+2. Emergency sheet opens.
+3. User selects emergency category.
+4. User confirms by holding the confirmation button for two seconds.
+5. The system creates an emergency packet.
+
+Provide a visible alternative:
+
+```text
+Cancel
+```
+
+Do not bury the cancellation action.
+
+---
+
+# 9. Page 1 — Login and Emergency Access
+
+Create a minimal entry screen.
+
+## Layout
+
+Show:
+
+* Narada Messenger logo
+* Product line: “Communication Beyond Infrastructure”
+* Network state
+* Narada ID field
+* Secure access button
+* Emergency guest access
+* Authority access
+
+Main actions:
+
+```text
+ACCESS NARADA
+EMERGENCY GUEST MODE
+AUTHORITY LOGIN
+```
+
+Add a small system status panel:
+
+```text
+CELLULAR NETWORK: UNAVAILABLE
+INTERNET: UNAVAILABLE
+LOCAL NARADA MESH: AVAILABLE
+```
+
+Do not create a decorative marketing landing page.
+
+This screen is an emergency access screen, not a promotional homepage.
+
+---
+
+# 10. Page 2 — Civilian Overview Dashboard
+
+The dashboard must provide the most important information without requiring scrolling on a standard laptop display.
+
+## Section A — Primary Status Card
+
+Large card at the top.
+
+Display:
+
+```text
+OFFLINE NETWORK ACTIVE
+Your device is operating as Narada Node NRD-8F29A7
+```
+
+Show four small status values:
+
+* Nearby nodes
+* Pending messages
+* Battery
+* Last location update
+
+Example:
+
+```text
+12 Nearby Nodes
+03 Messages Relaying
+64% Battery
+Location Updated 40 sec ago
+```
+
+Use cyan for connected values, yellow for pending items, and red only for critical problems.
+
+## Section B — Main Actions
+
+Use four large action buttons:
+
+```text
+SEND MESSAGE
+SEND SOS
+FIND SAFE ZONE
+MARK ME SAFE
+```
+
+Each button must have:
+
+* Large icon
+* Clear title
+* One-line description
+* Minimum 48px height
+
+Descriptions:
+
+```text
+Send Message
+Contact a person through nearby relay devices.
+
+Send SOS
+Request urgent medical, rescue, food, or shelter support.
+
+Find Safe Zone
+Locate nearby verified shelters and emergency facilities.
+
+Mark Me Safe
+Notify trusted contacts and authorities that you are safe.
+```
+
+## Section C — Active Message
+
+Show only the most relevant active message.
+
+Example:
+
+```text
+MESSAGE TO ALISHA SHARMA
+Status: Relaying
+Route: You → Node 04 → Bus Relay → Node 19
+Current distance to destination: 2.8 km
+Last movement: 18 seconds ago
+```
+
+Show a simple progress path:
+
+```text
+SENT → RELAYING → NEAR DESTINATION → DELIVERED
+```
+
+Highlight the current stage.
+
+Buttons:
+
+```text
+VIEW ROUTE
+MESSAGE DETAILS
+```
+
+## Section D — Nearby Network
+
+Show a simple list of the three best nearby relay nodes.
+
+Each row:
+
+* Node label
+* Distance
+* Direction
+* Battery
+* Trust status
+* Connection quality
+
+Example:
+
+```text
+BUS RELAY 07
+180 m away • Moving East • 82% battery
+Verified Community Relay
+```
+
+Do not show technical routing calculations on the main dashboard.
+
+Provide:
+
+```text
+VIEW ALL NODES
+```
+
+## Section E — Latest Safety Information
+
+Show one or two official alerts only.
+
+Example:
+
+```text
+SAFE ROUTE AVAILABLE
+Medical Centre Road is verified clear.
+Updated 2 minutes ago by Authority Node A-14.
+```
+
+Critical alert example:
+
+```text
+AVOID MAIN GATE
+Multiple danger reports received.
+Updated 48 seconds ago.
+```
+
+---
+
+# 11. Page 3 — Messages
+
+The messages page must feel familiar but remain optimized for delayed offline delivery.
+
+## Main Layout
+
+Desktop:
+
+* Left contact list
+* Right conversation panel
+
+Mobile:
+
+* Contact list first
+* Open conversation as a separate screen
+
+## Contact List
+
+Each contact should display:
+
+* Name
+* Narada ID
+* Last-known zone
+* Last location update
+* Delivery state
+* Verification state
+
+Example:
+
+```text
+Alisha Sharma
+NRD-34A91C
+Last seen near Medical Centre • 4 min ago
+2 messages relaying
+```
+
+Add a large search field:
+
+```text
+Search name, Narada ID, phone, or saved contact
+```
+
+Provide filters:
+
+* All
+* Delivered
+* Relaying
+* Waiting
+* Emergency
+
+Do not add unnecessary social features such as stories, reactions, profile feeds, or status posts.
+
+## Conversation Screen
+
+Show:
+
+* Contact name
+* Narada ID
+* Verification badge
+* Last-known location
+* Location freshness
+* Network availability
+
+Message state labels:
+
+```text
+QUEUED
+SEARCHING FOR RELAY
+RELAYING
+CARRIED BY NODE
+NEAR DESTINATION
+DELIVERED
+EXPIRED
+FAILED
+```
+
+Each message can show:
+
+* Sent time
+* Priority
+* Hop count
+* Current state
+
+Use a normal readable chat layout.
+
+Add a compact route information line under pending messages:
+
+```text
+Currently stored on Bus Relay 07 • 4 hops remaining
+```
+
+## Compose Area
+
+Provide:
+
+* Message input
+* Priority selector
+* Send button
+* Attach current location
+* Use emergency template
+
+Priority selector:
+
+```text
+NORMAL
+IMPORTANT
+URGENT
+```
+
+Red must not be used for normal or important messages.
+
+Emergency messages should be sent from the Emergency Centre rather than casually from the message composer.
+
+---
+
+# 12. Page 4 — Network Map
+
+Create a dark offline map using Leaflet and OpenStreetMap-style mock tiles or a local dark grid map.
+
+The map must remain readable and not become visually crowded.
+
+## Map Markers
+
+Use distinct markers for:
+
+* User device
+* Civilian nodes
+* Moving relay nodes
+* Community relay points
+* Authority nodes
+* Safe zones
+* Danger zones
+* Message packets
+* Receiver’s last-known location
+
+Colour meaning:
+
+* User: Yellow
+* Relay device: Cyan
+* Authority: Cyan with shield icon
+* Safe zone: Cyan shelter icon
+* Danger: Red
+* Receiver destination: Yellow target
+* Active route: Cyan line
+* Failed route: Red dashed line
+* Potential route: Muted yellow dotted line
+
+## Map Controls
+
+Provide only:
+
+* Zoom
+* Centre on me
+* Show active message
+* Show safe zones
+* Filter nodes
+* Pause simulation
+
+## Bottom Information Drawer
+
+When a node is selected, show:
+
+```text
+BUS RELAY 07
+Type: Community Relay
+Distance: 180 m
+Movement: East
+Battery: 82%
+Signal: Strong
+Trust: Verified
+Last beacon: 8 sec ago
+```
+
+Action:
+
+```text
+VIEW ROUTING VALUE
+```
+
+## Active Route Display
+
+Display the current route clearly:
+
+```text
+YOU → NODE 04 → BUS RELAY 07 → NODE 19 → ALISHA
+```
+
+Also show:
+
+* Hop count
+* Estimated probability of delivery
+* Last packet movement
+* Current carrier
+* Destination freshness
+
+Do not show fake precise delivery times.
+
+Use wording such as:
+
+```text
+Delivery likelihood: High
+Current progress: Moving toward destination
+```
+
+---
+
+# 13. Page 5 — Routing Simulator
+
+This page demonstrates the project’s geographic opportunistic routing.
+
+It can contain more technical information because it is intended for judges and demonstrations.
+
+## Header
+
+```text
+ROUTING DECISION
+Selecting the safest and most effective next relay.
+```
+
+## Current Packet
+
+Display:
+
+* Sender
+* Receiver
+* Last-known destination
+* Priority
+* Expiry
+* Copies remaining
+* Current hop count
+
+## Candidate Nodes Table
+
+Columns:
+
+* Node
+* Distance improvement
+* Movement direction
+* Battery
+* Signal
+* Reliability
+* Routing score
+* Decision
+
+Example:
+
+```text
+Node 04
++1.3 km closer
+Moving toward receiver
+68% battery
+Strong signal
+Trust 82
+Score 88
+SELECTED
+```
+
+Use human-readable explanations.
+
+Do not display only raw numbers.
+
+## Decision Explanation
+
+Example:
+
+```text
+Node 04 was selected because it is moving toward the receiver,
+has sufficient battery, provides strong signal quality, and improves
+the packet’s geographic position by 1.3 km.
+```
+
+## Store-Carry-Forward State
+
+When no useful relay exists, display:
+
+```text
+NO BETTER RELAY AVAILABLE
+The encrypted message is stored safely on the current device.
+The system will scan again when a new device enters range.
+```
+
+Show a calm yellow indicator rather than a red failure state.
+
+This is expected network behaviour, not an error.
+
+---
+
+# 14. Page 6 — Emergency Centre
+
+This page must be the simplest and most readable screen.
+
+## Header
+
+```text
+WHAT HELP DO YOU NEED?
+```
+
+Show large emergency category cards:
+
+1. Medical
+2. Trapped
+3. Fire
+4. Food or Water
+5. Shelter
+6. Missing Person
+7. Evacuation
+8. Other Emergency
+
+Each category must include:
+
+* Large icon
+* Large label
+* One-line explanation
+
+Example:
+
+```text
+MEDICAL
+Injury, illness, bleeding, or urgent medical support.
+```
+
+## Emergency Form
+
+After selecting a category, show only necessary fields:
+
+* Current location
+* Location accuracy
+* Short emergency message
+* Number of people
+* Ability to move
+* Battery level
+* Optional trusted contact
+
+Use simple choices:
+
+```text
+Can you move?
+YES
+WITH DIFFICULTY
+NO
+```
+
+```text
+How many people need help?
+1
+2–5
+6+
+```
+
+## Confirmation Screen
+
+Before sending, display:
+
+```text
+MEDICAL SOS
+Location: 31.3959, 75.5358
+Accuracy: ±18 metres
+Battery: 16%
+People needing help: 1
+Movement: Unable to move
+```
+
+Confirmation button:
+
+```text
+HOLD 2 SECONDS TO SEND SOS
+```
+
+After sending:
+
+```text
+SOS PACKET CREATED
+Broadcasting through 5 available relay paths.
+```
+
+Show:
+
+* Packet ID
+* Authorities reached
+* Confirmation reports
+* Last relay movement
+* Option to update emergency
+* Option to cancel only with confirmation
+
+---
+
+# 15. Page 7 — Deliveries and Message Tracking
+
+Show all outgoing and incoming packets.
+
+Filters:
+
+* Active
+* Delivered
+* Waiting
+* Expired
+* Emergency
+
+Each delivery card should include:
+
+* Receiver
+* Message type
+* Current state
+* Current carrier
+* Hop count
+* Created time
+* Expiry
+* Priority
+
+Example:
+
+```text
+MESSAGE TO HRIDYA SHARMA
+RELAYING
+Current carrier: Node 19
+4 of 8 maximum hops used
+Created: 14:32
+Expires in: 2h 18m
+```
+
+Actions:
+
+```text
+VIEW ROUTE
+VIEW PACKET
+CANCEL
+```
+
+Do not display a technical packet inspector until the user chooses “View Packet”.
+
+---
+
+# 16. Page 8 — Message Packet Inspector
+
+Create a clean technical view for hackathon demonstration.
+
+Display:
+
+```text
+Packet ID
+Sender ID
+Receiver ID
+Creation time
+Expiry time
+Priority
+Maximum hops
+Current hops
+Copies remaining
+Encryption state
+Signature state
+Current carrier
+Delivery state
+```
+
+Encryption content should appear visually protected:
+
+```text
+CONTENT: ENCRYPTED
+ALGORITHM: DEMONSTRATION E2E ENCRYPTION
+INTERMEDIATE NODES CANNOT READ MESSAGE
+```
+
+Show a packet route timeline:
+
+```text
+14:32 Created on NRD-8F29A7
+14:33 Forwarded to Node 04
+14:36 Carried by Bus Relay 07
+14:41 Forwarded to Node 19
+14:44 Near receiver zone
+```
+
+Use cyan for successful transfers and yellow for pending transfers.
+
+---
+
+# 17. Page 9 — Safe Zones
+
+Create a simple safe-location directory.
+
+Show:
+
+* Nearby shelter
+* Distance
+* Walking direction
+* Verification status
+* Capacity
+* Medical availability
+* Water availability
+* Last status update
+
+Example:
+
+```text
+NIT MEDICAL CENTRE
+0.8 km away
+Verified Authority Zone
+Capacity: Limited
+Medical support: Available
+Water: Available
+Updated: 1 minute ago
+```
+
+Actions:
+
+```text
+SHOW ON MAP
+ROUTE TO SHELTER
+SEND LOCATION TO CONTACT
+```
+
+Avoid large descriptive paragraphs.
+
+Sort locations by:
+
+1. Safety verification
+2. Distance
+3. Capacity
+4. Last update freshness
+
+---
+
+# 18. Page 10 — Authority Dashboard
+
+The Authority Dashboard must prioritize incidents, not analytics.
+
+## Primary Layout
+
+Desktop:
+
+* Left incident queue
+* Centre incident map
+* Right selected incident details
+
+Mobile and tablet:
+
+* Incident queue
+* Incident detail
+* Optional map tab
+
+## Top Status Summary
+
+Show only:
+
+* Critical incidents
+* Active SOS alerts
+* Assigned teams
+* Available responders
+* Network coverage
+
+Example:
+
+```text
+08 CRITICAL
+21 ACTIVE SOS
+06 TEAMS ASSIGNED
+14 RESPONDERS AVAILABLE
+72% NETWORK COVERAGE
+```
+
+Use red only for critical unresolved incidents.
+
+## Incident Queue
+
+Sort by:
+
+1. Life-threatening severity
+2. Verification confidence
+3. Time waiting
+4. Location freshness
+5. Nearby response availability
+
+Each incident row:
+
+```text
+MEDICAL SOS
+Shashank Chimote
+Unable to move
+Location accuracy: ±18 m
+Updated 32 sec ago
+Confirmed by 3 nearby nodes
+```
+
+Status labels:
+
+* Unassigned
+* Reviewing
+* Team Assigned
+* Responder En Route
+* Reached
+* Resolved
+* False or Duplicate
+
+## Selected Incident Panel
+
+Display:
+
+* Person name
+* Narada ID
+* Emergency type
+* Message
+* Current or last-known coordinates
+* Accuracy
+* Battery
+* Number of people
+* Ability to move
+* Time received
+* Number of confirming reports
+* Trust level
+* Route history
+
+Primary actions:
+
+```text
+ASSIGN RESPONSE TEAM
+CONTACT NEARBY RELAY
+MARK AS REVIEWING
+BROADCAST INSTRUCTION
+```
+
+Secondary actions:
+
+```text
+MARK DUPLICATE
+FLAG SUSPICIOUS
+RESOLVE INCIDENT
+```
+
+Do not place destructive actions beside primary response actions.
+
+## Location Timeline
+
+Example:
+
+```text
+14:37 Detected near Hostel Block A
+14:49 Message forwarded near Main Gate
+15:04 SOS location received near Medical Centre
+```
+
+Clearly label this as:
+
+```text
+PROBABLE MOVEMENT HISTORY
+Not guaranteed real-time location
+```
+
+---
+
+# 19. Page 11 — Authority Broadcast Centre
+
+Allow verified authorities to create short emergency announcements.
+
+Categories:
+
+* Evacuation
+* Safe Route
+* Danger Area
+* Shelter Update
+* Medical Facility
+* Resource Availability
+* General Instruction
+
+Fields:
+
+* Announcement title
+* Short instruction
+* Affected area
+* Priority
+* Expiry
+* Authority signature
+
+Limit the announcement body to a short readable length.
+
+Preview example:
+
+```text
+AVOID MAIN GATE
+Unsafe activity reported near the main entrance.
+Use Medical Centre Road for evacuation.
+Valid for the next 60 minutes.
+```
+
+Require confirmation before broadcast.
+
+---
+
+# 20. Page 12 — Network Analytics
+
+Keep analytics secondary and judge-focused.
+
+Display:
+
+* Active nodes
+* Delivered messages
+* Pending messages
+* Active SOS alerts
+* Average hops per delivery
+* Network coverage
+* Delayed packets
+* Most useful relay node
+
+Use a maximum of three charts:
+
+1. Message delivery status
+2. Network coverage over time
+3. Active nodes by type
+
+Do not use bright multicoloured charts.
+
+Use only yellow, cyan, red, slate, and white.
+
+Charts should include labels and not rely only on colour.
+
+---
+
+# 21. Settings
+
+Provide simple settings:
+
+## Network
+
+* Enable relay mode
+* Maximum battery usage
+* Background scanning frequency
+* Store message packets
+* Allow emergency priority relays
+
+## Privacy
+
+* Share approximate location
+* Share movement direction
+* Use temporary relay ID
+* Accept authority broadcasts
+* Trusted contacts
+
+## Accessibility
+
+* Large text
+* High contrast
+* Reduce motion
+* Disable sound
+* Vibration alerts
+* One-handed mode
+
+## Battery Saver
+
+When active:
+
+* Reduce scan animation
+* Reduce location updates
+* Reduce map refresh rate
+* Disable background visual effects
+* Preserve emergency relay functionality
+
+---
+
+# 22. Reusable Components
+
+Create reusable React components:
+
+```text
+AppShell
+Sidebar
+MobileBottomNavigation
+TopNetworkStatus
+EmergencyButton
+StatusBadge
+PrimaryActionCard
+NetworkStatusCard
+MessageStatusTracker
+NodeListItem
+ContactListItem
+ConversationPanel
+MessageBubble
+RelayRoute
+RouteTimeline
+NodeDetailDrawer
+EmergencyCategoryCard
+SOSConfirmation
+SafeZoneCard
+IncidentQueue
+IncidentCard
+IncidentDetailPanel
+AuthorityBroadcastForm
+PacketInspector
+NetworkMetricCard
+BatteryIndicator
+LocationFreshnessBadge
+VerificationBadge
+EmptyState
+OfflineAlert
+ConfirmationDialog
+```
+
+---
+
+# 23. Status Badge System
+
+Use standardized badges.
+
+## Network
+
+```text
+NETWORK ACTIVE
+LIMITED COVERAGE
+NO RELAYS FOUND
+SCANNING
+BATTERY SAVER
+```
+
+## Messages
+
+```text
+QUEUED
+SEARCHING
+RELAYING
+CARRY MODE
+NEAR DESTINATION
+DELIVERED
+EXPIRED
+FAILED
+```
+
+## Safety
+
+```text
+SAFE
+WARNING
+DANGER
+UNKNOWN
+```
+
+## Verification
+
+```text
+VERIFIED AUTHORITY
+TRUSTED CONTACT
+MULTIPLE CONFIRMATIONS
+UNVERIFIED
+SUSPICIOUS
+```
+
+Every status must use:
+
+* Icon
+* Text
+* Colour
+* Optional short explanation
+
+---
+
+# 24. Empty and Failure States
+
+Do not show blank screens.
+
+## No Nearby Nodes
+
+```text
+NO RELAY DEVICE FOUND
+Your message is stored securely.
+Narada will scan again automatically.
+```
+
+Action:
+
+```text
+SCAN NOW
+```
+
+## No Messages
+
+```text
+NO ACTIVE MESSAGES
+Your communication queue is clear.
+```
+
+## Location Unavailable
+
+```text
+LOCATION UNAVAILABLE
+Enter your zone manually or continue with reduced routing accuracy.
+```
+
+## Low Battery
+
+```text
+BATTERY CRITICAL
+Relay scanning has been reduced.
+Emergency communication remains active.
+```
+
+## Message Expired
+
+```text
+MESSAGE EXPIRED
+The packet reached its time limit before delivery.
+You can create a new message with updated location data.
+```
+
+---
+
+# 25. Accessibility Requirements
+
+Follow WCAG-oriented accessibility practices.
+
+Requirements:
+
+* Maintain strong contrast.
+* Use visible keyboard focus states.
+* Provide screen-reader labels.
+* Use semantic HTML.
+* Make all primary touch targets at least 48×48px.
+* Never use colour as the only status indicator.
+* Respect reduced motion settings.
+* Avoid flashing more than three times per second.
+* Use readable error messages.
+* Keep instructions short.
+* Provide confirmation for dangerous actions.
+* Keep the SOS flow accessible through keyboard navigation.
+* Allow text scaling without breaking layouts.
+
+---
+
+# 26. Mock Simulation Data
+
+Create realistic mock users and nodes.
+
+## Users
+
+```javascript
+const users = [
+  {
+    id: "NRD-8F29A7",
+    name: "Shashank Chimote",
+    role: "Civilian",
+    zone: "NIT Jalandhar",
+    battery: 64,
+    verified: true
+  },
+  {
+    id: "NRD-34A91C",
+    name: "Alisha Sharma",
+    role: "Civilian",
+    zone: "Medical Centre",
+    battery: 48,
+    verified: true
+  },
+  {
+    id: "NRD-55B72D",
+    name: "Hridya Sharma",
+    role: "Civilian",
+    zone: "Main Gate",
+    battery: 71,
+    verified: true
+  },
+  {
+    id: "NRD-92C11F",
+    name: "Premanshu Dey",
+    role: "Civilian",
+    zone: "Hostel Block B",
+    battery: 39,
+    verified: true
+  }
+];
+```
+
+## Relay Nodes
+
+Create at least:
+
+* 12 civilian nodes
+* 3 moving relay nodes
+* 2 buses
+* 2 authority nodes
+* 2 shelters
+* 1 hospital
+* 2 danger zones
+
+Each node should contain:
+
+```javascript
+{
+  id: "NODE-04",
+  name: "Node 04",
+  type: "civilian",
+  latitude: 31.3959,
+  longitude: 75.5358,
+  battery: 68,
+  signal: "strong",
+  trustScore: 82,
+  movementDirection: "east",
+  speed: 4,
+  storageAvailable: 72,
+  lastBeaconSeconds: 8,
+  verified: false
+}
+```
+
+---
+
+# 27. Required Simulation Behaviour
+
+The frontend prototype must visually simulate:
+
+1. Searching for nearby nodes
+2. Selecting the receiver
+3. Reading the receiver’s last-known location
+4. Calculating routing scores
+5. Choosing the best relay
+6. Forwarding the packet
+7. Updating hop count
+8. Entering carry mode when no node is suitable
+9. Detecting a new node later
+10. Continuing packet delivery
+11. Sending a delivery receipt
+12. Removing unnecessary duplicate copies
+13. Prioritizing SOS packets
+14. Displaying authority confirmation
+15. Updating incident status
+
+Animations should be slow enough to understand and fast enough for a hackathon demonstration.
+
+Provide simulation controls:
+
+```text
+START
+PAUSE
+RESET
+NEXT STEP
+SPEED: 1X / 2X / 4X
+```
+
+Keep these controls in a separate demo panel, not inside the civilian emergency interface.
+
+---
+
+# 28. Frontend Technology
+
+Use:
+
+* React.js with Vite
+* Tailwind CSS
+* React Router
+* Lucide React icons
+* Leaflet with React Leaflet
+* Recharts for limited analytics
+* Framer Motion for subtle transitions
+* Local mock JSON data
+* LocalStorage for prototype persistence
+
+The frontend should be component-based and cleanly structured.
+
+Suggested folder structure:
+
+```text
+src/
+├── components/
+│   ├── layout/
+│   ├── emergency/
+│   ├── messaging/
+│   ├── network/
+│   ├── authority/
+│   └── common/
+├── pages/
+│   ├── Login.jsx
+│   ├── Dashboard.jsx
+│   ├── Messages.jsx
+│   ├── NetworkMap.jsx
+│   ├── RoutingSimulator.jsx
+│   ├── EmergencyCentre.jsx
+│   ├── Deliveries.jsx
+│   ├── SafeZones.jsx
+│   ├── AuthorityDashboard.jsx
+│   ├── BroadcastCentre.jsx
+│   ├── Analytics.jsx
+│   └── Settings.jsx
+├── data/
+│   ├── users.js
+│   ├── nodes.js
+│   ├── messages.js
+│   └── incidents.js
+├── hooks/
+├── utils/
+│   ├── routingScore.js
+│   ├── distance.js
+│   └── statusHelpers.js
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+# 29. Important Restrictions
+
+Do not:
+
+* Create a messy cyberpunk dashboard.
+* Add unnecessary cards.
+* Add fake stock-market style graphs.
+* Overuse red.
+* Overuse glowing effects.
+* Apply glitch effects to messages.
+* Use tiny terminal text.
+* Use long technical paragraphs in civilian mode.
+* Create too many navigation options.
+* Hide emergency actions inside menus.
+* Place multiple competing primary buttons together.
+* Show exact delivery-time promises.
+* Use social media features.
+* Use decorative AI chatbot panels.
+* Add unnecessary profile customization.
+* Add complex settings to the main dashboard.
+* Use random gradients.
+* Use bright purple, green, orange, or pink.
+* Use excessive rounded “bubble” cards.
+* make the UI feel like a gaming dashboard.
+
+The interface must feel like a serious emergency communication system.
+
+---
+
+# 30. Final Visual Direction
+
+The final result should feel like:
+
+* A disaster-response operating system
+* A military communication terminal
+* A modern emergency application
+* A decentralized network monitor
+* A secure offline messaging platform
+
+But it must remain:
+
+* Human
+* Calm
+* Readable
+* Simple
+* Practical
+* Accessible
+
+The sci-fi styling must remain in the background.
+
+The user’s safety actions and communication status must always remain visually dominant.
+
+Use the main visual hierarchy:
+
+```text
+1. Danger and emergency actions
+2. Network availability
+3. Message delivery status
+4. Safe-zone information
+5. Nearby relay information
+6. Technical system details
+```
+
+Create a fully responsive, polished frontend prototype with realistic mock data and working interactions. Prioritize the Civilian Overview Dashboard, Messages, Network Map, Emergency Centre, Delivery Tracking, Routing Simulator, and Authority Dashboard as the primary hackathon demonstration flow.
