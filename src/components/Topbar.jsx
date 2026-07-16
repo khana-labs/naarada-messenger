@@ -1,10 +1,10 @@
 import {
   BatteryCharging,
-  Bell,
   Menu,
   RadioTower,
   ShieldCheck,
 } from "lucide-react";
+import NotificationCentre from "./NotificationCentre";
 
 function Topbar({
   batterySaver,
@@ -55,14 +55,7 @@ function Topbar({
           <span>Encrypted</span>
         </div>
 
-        <button
-          type="button"
-          className="icon-button notification-button"
-          aria-label="View notifications"
-        >
-          <Bell size={21} />
-          <span className="notification-count">3</span>
-        </button>
+        <NotificationCentre />
       </div>
     </header>
   );

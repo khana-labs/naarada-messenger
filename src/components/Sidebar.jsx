@@ -4,6 +4,7 @@ import {
   BatteryMedium,
   CircleUserRound,
   LayoutDashboard,
+  LogOut,
   Map,
   MessageSquare,
   PackageSearch,
@@ -14,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const primaryLinks = [
   {
@@ -91,6 +93,13 @@ function SidebarLink({ item, onClick }) {
 }
 
 function Sidebar({ isOpen, onClose }) {
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    onClose();
+  };
+
   return (
     <aside className={`sidebar ${isOpen ? "sidebar-open" : ""}`}>
       <div className="sidebar-header">
@@ -148,8 +157,8 @@ function Sidebar({ isOpen, onClose }) {
           </div>
 
           <div>
-            <strong>Shashank</strong>
-            <span>NRD-8F29A7</span>
+            <strong>{user?.name || "Narada User"}</strong>
+            <span>{user?.naradaId || "NRD-UNKNOWN"}</span>
           </div>
         </NavLink>
 
@@ -161,6 +170,15 @@ function Sidebar({ isOpen, onClose }) {
           <Settings size={18} />
           <span>Settings</span>
         </NavLink>
+
+        <button
+          type="button"
+          className="sidebar-footer-link sidebar-logout-button"
+          onClick={handleLogout}
+        >
+          <LogOut size={18} />
+          <span>Logout</span>
+        </button>
 
         <div className="battery-summary">
           <BatteryMedium size={18} />

@@ -1,13 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { SocketProvider } from "./context/SocketContext";
 import App from "./App";
+import { AuthProvider } from "./context/AuthContext";
 import "./index.css";
+import { NotificationProvider } from "./context/NotificationContext";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthProvider>
+        <SocketProvider>
+            <NotificationProvider>
+              <App />
+          </NotificationProvider>
+        </SocketProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

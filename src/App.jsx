@@ -1,10 +1,13 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+
 import {
   Activity,
   BarChart3,
   CircleUserRound,
-  Map,
-  MessageSquare,
   PackageSearch,
   RadioTower,
   Settings,
@@ -13,22 +16,43 @@ import {
 } from "lucide-react";
 
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Messages from "./pages/Messages";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import NetworkMap from "./pages/NetworkMap";
+import Register from "./pages/Register";
+import EmergencyCentre from "./pages/EmergencyCentre";
+import AuthorityDashboard from "./pages/AuthorityDashboard";
+import SimulationControl from "./pages/SimulationControl";
+import RoutingSimulator from "./pages/RoutingSimulator";
+import PacketInspector from "./pages/PacketInspector";
+import Analytics from "./pages/Analytics";
 
-function PlaceholderPage({ icon: Icon, title, description }) {
+function PlaceholderPage({
+  icon: Icon,
+  title,
+  description,
+}) {
   return (
     <section className="page placeholder-page">
-      <div className="placeholder-icon" aria-hidden="true">
+      <div className="placeholder-icon">
         <Icon size={36} />
       </div>
 
       <p className="eyebrow">NARADA MODULE</p>
+
       <h1>{title}</h1>
+
       <p>{description}</p>
 
       <div className="system-notice">
         <Activity size={18} />
-        <span>This module will be connected in the next development step.</span>
+
+        <span>
+          This module will be connected in the next
+          development step.
+        </span>
       </div>
     </section>
   );
@@ -37,97 +61,73 @@ function PlaceholderPage({ icon: Icon, title, description }) {
 function App() {
   return (
     <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
+      <Route
+        path="/login"
+        element={<Login />}
+      />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+        path="/register"
+        element={<Register />}
+      />
 
+      <Route
+        element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }
+      >
         <Route
-          path="/messages"
+          index
           element={
-            <PlaceholderPage
-              icon={MessageSquare}
-              title="Messages"
-              description="Search contacts, create encrypted packets, and monitor message delivery."
+            <Navigate
+              to="/dashboard"
+              replace
             />
           }
         />
 
         <Route
+          path="/dashboard"
+          element={<Dashboard />}
+        />
+
+        <Route path="/messages" element={<Messages />} />
+
+        <Route
           path="/network"
-          element={
-            <PlaceholderPage
-              icon={Map}
-              title="Network Map"
-              description="View nearby devices, relay routes, disconnected zones, shelters, and authority nodes."
-            />
-          }
+          element={<NetworkMap />}
         />
 
         <Route
           path="/routing"
-          element={
-            <PlaceholderPage
-              icon={RadioTower}
-              title="Routing Simulator"
-              description="Compare nearby devices and select the safest route toward the receiver."
-            />
-          }
+          element={<RoutingSimulator />}
         />
 
         <Route
           path="/emergency"
-          element={
-            <PlaceholderPage
-              icon={Siren}
-              title="Emergency Centre"
-              description="Create an SOS packet and request medical, rescue, shelter, or evacuation support."
-            />
-          }
+          element={<EmergencyCentre />}
         />
 
         <Route
           path="/authority"
-          element={
-            <PlaceholderPage
-              icon={ShieldAlert}
-              title="Authority Dashboard"
-              description="Monitor critical incidents and coordinate verified emergency response teams."
-            />
-          }
+          element={<AuthorityDashboard />}
         />
 
         <Route
           path="/packet"
-          element={
-            <PlaceholderPage
-              icon={PackageSearch}
-              title="Packet Inspector"
-              description="Inspect encrypted message metadata, signatures, relay hops, and expiry information."
-            />
-          }
+          element={<PacketInspector />}
         />
 
         <Route
           path="/analytics"
-          element={
-            <PlaceholderPage
-              icon={BarChart3}
-              title="Network Analytics"
-              description="Review network health, delivery performance, relay reliability, and coverage."
-            />
-          }
+          element={<Analytics />}
         />
 
         <Route
           path="/simulation"
-          element={
-            <PlaceholderPage
-              icon={Activity}
-              title="Simulation Control"
-              description="Trigger network failures, move relay nodes, and demonstrate delivery scenarios."
-            />
-          }
+           element={<SimulationControl />}
         />
 
         <Route
@@ -151,9 +151,14 @@ function App() {
             />
           }
         />
-
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
+
+      <Route
+        path="*"
+        element={
+          <Navigate to="/dashboard" replace />
+        }
+      />
     </Routes>
   );
 }
