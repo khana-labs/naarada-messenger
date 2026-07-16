@@ -173,6 +173,21 @@ io.on("connection", (socket) => {
 /*
  * These must remain after all valid routes.
  */
+
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    service: "Narada Messenger API",
+    status: "online",
+  });
+});
+
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    status: "healthy",
+  });
+});
 app.use(notFoundHandler);
 app.use(errorHandler);
 
